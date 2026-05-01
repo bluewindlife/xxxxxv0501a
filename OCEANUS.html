@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>還暦祝い 時計候補カタログ</title>
+
+  <style>
+    :root {
+      --bg: #eceff1;
+      --paper: #fffdfa;
+      --ink: #202326;
+      --muted: #6d7378;
+      --subtle: #9ba2a7;
+      --line: #d8dde1;
+      --line-soft: #edf0f2;
+      --accent: #5f6f7a;
+      --accent-dark: #35434d;
+      --accent-soft: #eef2f4;
+      --blue: #8d9aa3;
+      --silver: #b8c1c7;
+      --navy: #222a31;
+      --shadow: 0 22px 60px rgba(36, 42, 46, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(184,193,199,0.22), transparent 30%),
+        linear-gradient(135deg, #f5f6f7, #dfe4e7);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", Meiryo, sans-serif;
+      line-height: 1.65;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 28px auto;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .catalog-header {
+      position: relative;
+      padding: 54px 64px 46px;
+      background:
+        linear-gradient(135deg, rgba(47,57,64,0.98), rgba(28,35,41,0.97)),
+        radial-gradient(circle at top right, rgba(184,193,199,0.50), transparent 34%);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .catalog-header::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: inset 0 0 0 52px rgba(255,255,255,0.035);
+    }
+
+    .catalog-header::before {
+      content: "";
+      position: absolute;
+      left: 64px;
+      bottom: 0;
+      width: calc(100% - 128px);
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.42), transparent);
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border: 1px solid rgba(255,255,255,0.30);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .catalog-no {
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 22px 0 0;
+      font-size: clamp(34px, 4vw, 48px);
+      line-height: 1.22;
+      letter-spacing: 0.05em;
+      font-weight: 900;
+    }
+
+    .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 16px 0 0;
+      color: rgba(255,255,255,0.86);
+      font-size: 15.5px;
+    }
+
+    .content {
+      padding: 46px 58px 54px;
+    }
+
+    .product-panel,
+    .color-variation {
+      display: grid;
+      grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .photo-panel {
+      min-width: 0;
+    }
+
+    .main-watch-frame,
+    .variation-image-frame {
+      height: 470px;
+      background:
+        radial-gradient(circle at center, #ffffff 0%, #f4f5f5 58%, #dde2e5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: none;
+      padding: 26px;
+    }
+
+    .main-watch-photo,
+    .variation-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 18px 22px rgba(28, 35, 41, 0.15));
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    .js-soft-scale .main-watch-photo,
+    .js-soft-scale .variation-image {
+      opacity: 0;
+      transform: scale(1.025);
+      transition:
+        opacity 1.1s ease-out,
+        transform 1.1s ease-out,
+        filter 0.3s ease;
+    }
+
+    .js-soft-scale.is-visible .main-watch-photo,
+    .js-soft-scale.is-visible .variation-image {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .thumbnail-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .thumb-button {
+      appearance: none;
+      border: none;
+      background: #fff;
+      padding: 8px;
+      height: 104px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(216,221,225,0.85);
+      transition:
+        transform 0.08s ease-out,
+        box-shadow 0.1s ease-out,
+        background 0.08s ease-out;
+    }
+
+    .thumb-button.is-active {
+      box-shadow:
+        inset 0 0 0 2px rgba(95,111,122,0.82),
+        0 6px 14px rgba(36, 42, 46, 0.10);
+    }
+
+    .thumb-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 12px rgba(28, 35, 41, 0.08));
+      pointer-events: none;
+    }
+
+    .photo-caption {
+      margin-top: 12px;
+      padding: 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .spec-panel,
+    .variation-body {
+      min-width: 0;
+      padding-top: 6px;
+    }
+
+    .brand {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      font-weight: 900;
+    }
+
+    .product-name {
+      margin-top: 7px;
+      font-size: clamp(34px, 3.4vw, 44px);
+      font-weight: 900;
+      line-height: 1.16;
+      letter-spacing: 0.015em;
+    }
+
+    .product-sub {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      border: 1px solid #d9e0e4;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mini-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 30px;
+      row-gap: 20px;
+      margin-top: 32px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+
+    .mini-spec {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .mini-spec .k {
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+    }
+
+    .mini-spec .v {
+      margin-top: 6px;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+      margin-top: 50px;
+      padding-top: 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .editorial-section {
+      min-width: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 0.035em;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 7px;
+      height: 23px;
+      border-radius: 999px;
+      background: var(--blue);
+      flex: 0 0 auto;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 11px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 0.72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .scene-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .scene-item {
+      padding-left: 16px;
+      border-left: 3px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .scene-item strong {
+      display: block;
+      color: var(--accent-dark);
+      font-size: 13.5px;
+      margin-bottom: 3px;
+    }
+
+    .wide-section {
+      margin-top: 48px;
+      padding-top: 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .message-card,
+    .question {
+      margin-top: 48px;
+      padding: 26px 30px;
+      border-radius: 24px;
+      color: #fff;
+      box-shadow: 0 14px 34px rgba(28,35,41,0.20);
+    }
+
+    .message-card {
+      background:
+        linear-gradient(135deg, #2a3035, #596973);
+    }
+
+    .question {
+      background:
+        linear-gradient(135deg, var(--navy), #3c464f);
+    }
+
+    .message-card-title,
+    .question-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 9px;
+      letter-spacing: 0.04em;
+    }
+
+    .message-card p,
+    .question p {
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+    }
+
+    .compare-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 20px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .compare-box {
+      text-align: center;
+      padding: 18px 10px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .compare-box:last-child {
+      border-right: none;
+    }
+
+    .compare-box .score {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+
+    .compare-box .name {
+      margin-top: 7px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+
+    .basic-specs {
+      margin-top: 20px;
+    }
+
+    .basic-spec-title {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
+    }
+
+    .basic-spec-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .basic-spec-list li {
+      padding: 16px 14px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .basic-spec-list li:last-child {
+      border-right: none;
+    }
+
+    .basic-spec-list .k {
+      display: block;
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .basic-spec-list .v {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .tone-compare {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 20px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tone-item {
+      padding: 22px 24px;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .tone-item:last-child {
+      border-right: none;
+    }
+
+    .tone-label {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+    }
+
+    .tone-title {
+      margin-top: 7px;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .tone-item p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .variation-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+    }
+
+    .variation-name {
+      margin-top: 12px;
+      font-size: clamp(30px, 3vw, 40px);
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    .variation-text {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .variation-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .variation-point {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid #d9e0e4;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--accent-dark);
+    }
+
+    .back-home {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .back-home a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition:
+        color 0.12s ease-out,
+        background 0.12s ease-out,
+        transform 0.08s ease-out;
+    }
+
+    .back-home a:hover {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .js-animate {
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out;
+    }
+
+    .js-animate.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .js-soft-scale {
+      opacity: 0;
+      transition: opacity 0.9s ease-out;
+    }
+
+    .js-soft-scale.is-visible {
+      opacity: 1;
+    }
+
+    .js-stagger > * {
+      opacity: 0;
+      transform: translateY(10px);
+      transition:
+        opacity 0.65s ease-out,
+        transform 0.65s ease-out,
+        box-shadow 0.1s ease-out,
+        background 0.08s ease-out;
+    }
+
+    .js-stagger.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .js-stagger.is-visible > *:nth-child(1) {
+      transition-delay: 0.06s;
+    }
+
+    .js-stagger.is-visible > *:nth-child(2) {
+      transition-delay: 0.14s;
+    }
+
+    .js-stagger.is-visible > *:nth-child(3) {
+      transition-delay: 0.22s;
+    }
+
+    .js-stagger.is-visible > *:nth-child(4) {
+      transition-delay: 0.30s;
+    }
+
+    .thumbnail-row.is-visible > .thumb-button {
+      transition:
+        transform 0.08s ease-out,
+        box-shadow 0.1s ease-out,
+        background 0.08s ease-out;
+      transition-delay: 0s !important;
+    }
+
+    .thumbnail-row.is-visible .thumb-button:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 0 0 1px rgba(141,154,163,0.85),
+        0 8px 18px rgba(36, 42, 46, 0.12);
+    }
+
+    .thumbnail-row.is-visible .thumb-button.is-active:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 0 0 2px rgba(95,111,122,0.82),
+        0 8px 18px rgba(36, 42, 46, 0.14);
+    }
+
+    .thumb-button:active,
+    .tag:active,
+    .variation-point:active {
+      transform: scale(0.985);
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .catalog-header {
+        padding: 16mm 17mm 13mm;
+      }
+
+      .content {
+        padding: 12mm 16mm 16mm;
+      }
+
+      .product-panel,
+      .color-variation {
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+        gap: 18px;
+      }
+
+      .main-watch-frame,
+      .variation-image-frame {
+        height: 94mm;
+      }
+
+      .thumb-button {
+        height: 25mm;
+        cursor: default;
+      }
+
+      .mini-specs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 14px;
+        margin-top: 18px;
+        padding-top: 14px;
+      }
+
+      .mini-spec .v {
+        font-size: 13px;
+      }
+
+      .editorial-grid {
+        gap: 14px;
+        margin-top: 15px;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .wide-section {
+        margin-top: 16px;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .message-card,
+      .question {
+        margin-top: 16px;
+        padding: 16px 18px;
+      }
+
+      .basic-spec-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .basic-spec-list li:nth-child(2) {
+        border-right: none;
+      }
+
+      .basic-spec-list li:nth-child(1),
+      .basic-spec-list li:nth-child(2) {
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .tone-compare {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .tone-item {
+        padding: 14px 14px;
+      }
+
+      .back-home {
+        display: none;
+      }
+
+      .js-animate,
+      .js-soft-scale,
+      .js-stagger > *,
+      .js-soft-scale .main-watch-photo,
+      .js-soft-scale .variation-image {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body {
+        background: var(--paper);
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .catalog-header {
+        padding: 28px 18px 24px;
+      }
+
+      .catalog-header::before {
+        left: 18px;
+        width: calc(100% - 36px);
+      }
+
+      .content {
+        padding: 20px 16px 28px;
+      }
+
+      .product-panel,
+      .color-variation {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .photo-panel {
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      .main-watch-frame,
+      .variation-image-frame {
+        height: 360px;
+        border-radius: 18px;
+        padding: 12px;
+        background:
+          radial-gradient(circle at center, #ffffff 0%, #f4f5f5 58%, #e4e8eb 100%);
+      }
+
+      .thumb-button {
+        height: 96px;
+        border-radius: 14px;
+      }
+
+      .spec-panel,
+      .variation-body {
+        padding: 0;
+      }
+
+      .mini-specs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 24px;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .mini-spec {
+        padding: 13px 12px;
+        border: 1px solid var(--line-soft);
+        border-radius: 16px;
+        background: #ffffff;
+      }
+
+      .mini-spec .k {
+        font-size: 10.5px;
+      }
+
+      .mini-spec .v {
+        margin-top: 4px;
+        font-size: 13px;
+      }
+
+      .editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 34px;
+        padding-top: 32px;
+      }
+
+      .editorial-section {
+        padding: 17px 16px;
+        border: 1px solid var(--line-soft);
+        border-radius: 20px;
+        background: #ffffff;
+      }
+
+      .editorial-section .section-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+
+      .editorial-section .section-title::before {
+        height: 20px;
+      }
+
+      .bullet-list {
+        font-size: 13px;
+        gap: 9px;
+      }
+
+      .scene-list {
+        gap: 10px;
+      }
+
+      .scene-item {
+        padding-left: 13px;
+        font-size: 13px;
+      }
+
+      .wide-section {
+        margin-top: 36px;
+        padding-top: 32px;
+      }
+
+      .basic-spec-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .basic-spec-list li:nth-child(2) {
+        border-right: none;
+      }
+
+      .basic-spec-list li:nth-child(1),
+      .basic-spec-list li:nth-child(2) {
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .tone-compare {
+        grid-template-columns: 1fr;
+      }
+
+      .tone-item {
+        padding: 18px 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .tone-item:last-child {
+        border-bottom: none;
+      }
+
+      .tone-title {
+        font-size: 17px;
+      }
+
+      .tone-item p {
+        font-size: 13px;
+      }
+
+      .variation-name {
+        font-size: 24px;
+      }
+
+      .color-section {
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .product-name {
+        font-size: 30px;
+      }
+
+      .back-home {
+        margin-top: 34px;
+        padding-top: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .top-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .catalog-no {
+        text-align: left;
+      }
+
+      .main-watch-frame,
+      .variation-image-frame {
+        height: 320px;
+      }
+
+      .thumb-button {
+        height: 84px;
+      }
+
+      .compare-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .compare-box:nth-child(2) {
+        border-right: none;
+      }
+
+      .compare-box:nth-child(1),
+      .compare-box:nth-child(2) {
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .basic-spec-list {
+        grid-template-columns: 1fr;
+      }
+
+      .basic-spec-list li,
+      .basic-spec-list li:nth-child(2) {
+        border-right: none;
+      }
+
+      .basic-spec-list li:nth-child(1),
+      .basic-spec-list li:nth-child(2),
+      .basic-spec-list li:nth-child(3) {
+        border-bottom: 1px solid var(--line-soft);
+      }
+
+      .variation-points {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7px;
+      }
+
+      .variation-point {
+        text-align: center;
+        padding: 7px 6px;
+        font-size: 11px;
+      }
+
+      .message-card,
+      .question {
+        padding: 20px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js-animate,
+      .js-soft-scale,
+      .js-stagger > *,
+      .js-soft-scale .main-watch-photo,
+      .js-soft-scale .variation-image {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .thumb-button,
+      .tag,
+      .variation-point,
+      .back-home a {
+        transition: none;
+      }
+
+      .thumbnail-row.is-visible .thumb-button:hover,
+      .thumbnail-row.is-visible .thumb-button.is-active:hover,
+      .back-home a:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="catalog-header js-animate" data-delay="80">
+      <div class="top-row">
+        <div class="label">KANREKI GIFT WATCH CATALOG</div>
+        <div class="catalog-no">候補 C / OCEANUS</div>
+      </div>
+
+      <h1>上質な実用性を、<br>毎日の一本に。</h1>
+
+      <p class="lead">
+        日常で気軽に使いやすく、見た目にも上質感がある電波ソーラー時計の候補です。
+        手間なく長く使えるか、父に似合う雰囲気かを見て確認するための候補カードです。
+      </p>
+    </header>
+
+    <section class="content">
+      <div class="product-panel">
+        <div class="photo-panel image-switcher js-soft-scale" data-delay="220">
+          <div class="main-watch-frame" aria-label="時計メインイメージ">
+            <img
+              src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A.png"
+              alt="CASIO OCEANUS OCW-T2600RA-8AJF メインイメージ"
+              class="main-watch-photo switch-main-image"
+            />
+          </div>
+
+          <div class="thumbnail-row js-stagger" data-delay="520" aria-label="時計画像サムネイル">
+            <button
+              type="button"
+              class="thumb-button is-active"
+              data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A.png"
+              data-alt="CASIO OCEANUS OCW-T2600RA-8AJF メインイメージ"
+              aria-label="画像1をメインに表示"
+            >
+              <img
+                src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A.png"
+                alt=""
+                class="thumb-photo"
+              />
+            </button>
+
+            <button
+              type="button"
+              class="thumb-button"
+              data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A_front.jpg"
+              data-alt="CASIO OCEANUS OCW-T2600RA-8AJF 追加イメージ1"
+              aria-label="画像2をメインに表示"
+            >
+              <img
+                src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A_front.jpg"
+                alt=""
+                class="thumb-photo"
+              />
+            </button>
+
+            <button
+              type="button"
+              class="thumb-button"
+              data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A_kv.jpg"
+              data-alt="CASIO OCEANUS OCW-T2600RA-8AJF 追加イメージ2"
+              aria-label="画像3をメインに表示"
+            >
+              <img
+                src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600ra-8a/assets/OCW-T2600RA-8A_kv.jpg"
+                alt=""
+                class="thumb-photo"
+              />
+            </button>
+          </div>
+
+          <div class="photo-caption">
+            サムネイルを押すとメイン画像が切り替わります。雰囲気違いを見ながら、身につけたときの印象を確認できます。
+          </div>
+        </div>
+
+        <article class="spec-panel js-animate" data-delay="360">
+          <div class="brand">CASIO OCEANUS</div>
+
+          <div class="product-name">OCW-T2600RA-8AJF</div>
+
+          <div class="product-sub">
+            電波ソーラーの実用性と、落ち着いた上質感を両立した候補。
+            日常でも外出でも使いやすく、手間を少なく長く使える方向です。
+          </div>
+
+          <div class="tag-row js-stagger" data-delay="560">
+            <span class="tag">電波ソーラー</span>
+            <span class="tag">実用性</span>
+            <span class="tag">上質感</span>
+            <span class="tag">日常使い</span>
+          </div>
+
+          <div class="mini-specs js-stagger" data-delay="660">
+            <div class="mini-spec">
+              <div class="k">雰囲気</div>
+              <div class="v">上質・スマート</div>
+            </div>
+
+            <div class="mini-spec">
+              <div class="k">使う場面</div>
+              <div class="v">日常・外出・旅行</div>
+            </div>
+
+            <div class="mini-spec">
+              <div class="k">方向性</div>
+              <div class="v">手間なく長く使う</div>
+            </div>
+
+            <div class="mini-spec">
+              <div class="k">確認観点</div>
+              <div class="v">父に似合うか</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <section class="message-card js-animate">
+        <div class="message-card-title">この候補に込めた考え</div>
+        <p>
+          見た目の上質感を保ちつつ、電波ソーラーで日々の手間を減らせる時計として選びました。
+          軽やかな着け心地も魅力で、特別感だけでなく、実際に長く使いやすいことを重視しています。
+        </p>
+      </section>
+
+      <div class="editorial-grid js-animate">
+        <section class="editorial-section">
+          <h2 class="section-title">良いと思った理由</h2>
+
+          <ul class="bullet-list">
+            <li>電波ソーラーで、時刻合わせや電池交換の手間が少ない。</li>
+            <li>日常使いしやすい一方で、見た目にも上質感がある。</li>
+            <li>仕事、外出、旅行など幅広い場面で使いやすそう。</li>
+          </ul>
+        </section>
+
+        <section class="editorial-section">
+          <h2 class="section-title">使ってもらえたら嬉しい場面</h2>
+
+          <div class="scene-list">
+            <div class="scene-item">
+              <strong>普段の生活で</strong>
+              時刻合わせなどを気にせず、日常の一本として気軽に使える時計として。
+            </div>
+
+            <div class="scene-item">
+              <strong>外出や旅行で</strong>
+              実用性と上質感を両立し、出かける時にも自然に使える時計として。
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="wide-section js-animate">
+        <h2 class="section-title">候補としての印象</h2>
+
+        <div class="compare-strip js-stagger">
+          <div class="compare-box">
+            <div class="score">◎</div>
+            <div class="name">実用性</div>
+          </div>
+
+          <div class="compare-box">
+            <div class="score">◎</div>
+            <div class="name">メンテ性</div>
+          </div>
+
+          <div class="compare-box">
+            <div class="score">○</div>
+            <div class="name">上質感</div>
+          </div>
+
+          <div class="compare-box">
+            <div class="score">○</div>
+            <div class="name">父らしさ</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wide-section js-animate">
+        <div class="basic-specs">
+          <div class="basic-spec-title">BASIC SPEC</div>
+
+          <ul class="basic-spec-list js-stagger">
+            <li>
+              <span class="k">駆動</span>
+              <span class="v">電波ソーラー</span>
+            </li>
+            <li>
+              <span class="k">駆動期間</span>
+              <span class="v">約5ヵ月／約22ヵ月（パワーセービング状態の場合）</span>
+            </li>
+            <li>
+              <span class="k">時刻調整機能</span>
+              <span class="v">あり（自動受信）</span>
+            </li>
+            <li>
+              <span class="k">重さ</span>
+              <span class="v">90g</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="wide-section js-animate">
+        <h2 class="section-title">色味の比較</h2>
+
+        <div class="tone-compare js-stagger">
+          <div class="tone-item">
+            <div class="tone-label">OCW-T2600RA-8AJF</div>
+            <div class="tone-title">グレー×シルバーの上質系</div>
+            <p>
+  グレー基調の落ち着きとシルバーの軽やかさがあり、実用性の中にも上質感が出やすい印象。
+</p>
+          </div>
+
+          <div class="tone-item">
+  <div class="tone-label">OCW-T2600J-7AJF</div>
+  <div class="tone-title">白×シルバーの爽やか系</div>
+  <p>
+    白〜シルバー基調の明るさに、ブラウン系ベゼルと青いアクセントが入り、爽やかさと少し華やかな印象を両立しやすい候補。
+  </p>
+</div>
+
+         <div class="tone-item">
+  <div class="tone-label">OCW-T2600JB-1AJF</div>
+  <div class="tone-title">黒×ベージュの上質系</div>
+  <p>
+    時計全体をブラックでまとめ、ベージュを差し色にした候補。落ち着きの中に上質感があり、OCEANUSロゴのブルーが控えめなアクセントになります。
+  </p>
+</div>
+
+          <div class="tone-item">
+  <div class="tone-label">OCW-T2600B-1AJF</div>
+  <div class="tone-title">黒×ブルーの精悍系</div>
+  <p>
+    全体をブラックで統一し、OCEANUSらしいブルーを際立たせた候補。精悍でスポーティな印象がありつつ、上質感も出やすい仕上げです。
+  </p>
+</div>
+        </div>
+      </section>
+
+      <section class="question js-animate">
+  <div class="question-title">確認したいこと</div>
+  <p>
+    この時計の雰囲気が良いと思ったら、<br>
+    「グレー×シルバーの上質系」「白×シルバーの爽やか系」「黒×ベージュの上質系」「黒×ブルーの精悍系」なら、どれが父の好みに近いか教えてください。
+  </p>
+</section>
+
+      <section class="wide-section color-section js-animate">
+        <h2 class="section-title">色違い候補</h2>
+
+        <div class="color-variation">
+          <div class="photo-panel image-switcher js-soft-scale">
+            <div class="variation-image-frame" aria-label="色違い候補イメージ">
+              <img
+                src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600j-7a/assets/OCW-T2600J-7A.png"
+                alt="CASIO OCEANUS OCW-T2600J-7AJF 色違い候補 メインイメージ"
+                class="variation-image switch-main-image"
+              />
+            </div>
+
+            <div class="thumbnail-row js-stagger" aria-label="色違い候補画像サムネイル">
+              <button
+                type="button"
+                class="thumb-button is-active"
+                data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600j-7a/assets/OCW-T2600J-7A.png"
+                data-alt="CASIO OCEANUS OCW-T2600J-7AJF 色違い候補"
+                aria-label="色違い画像1をメインに表示"
+              >
+                <img
+                  src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600j-7a/assets/OCW-T2600J-7A.png"
+                  alt=""
+                  class="thumb-photo"
+                />
+              </button>
+
+              <button
+                type="button"
+                class="thumb-button"
+                data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600jb-1a/assets/OCW-T2600JB-1A.png"
+                data-alt="CASIO OCEANUS OCW-T2600JB-1AJF 色違い候補"
+                aria-label="色違い画像2をメインに表示"
+              >
+                <img
+                  src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/ocw-t2600jb-1a/assets/OCW-T2600JB-1A.png"
+                  alt=""
+                  class="thumb-photo"
+                />
+              </button>
+
+              <button
+                type="button"
+                class="thumb-button"
+                data-full-image="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/OCW-T2600B-1A/assets/OCW-T2600B-1A_Seq1.png"
+                data-alt="CASIO OCEANUS OCW-T2600B-1AJF 色違い候補"
+                aria-label="色違い画像3をメインに表示"
+              >
+                <img
+                  src="https://www.casio.com/content/dam/casio/product-info/locales/jp/ja/timepiece/product/watch/O/OC/OCW/OCW-T2600B-1A/assets/OCW-T2600B-1A_Seq1.png"
+                  alt=""
+                  class="thumb-photo"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="variation-body js-animate">
+            <div class="variation-label">COLOR VARIATION</div>
+
+            <div class="variation-name">OCEANUS T2600 Series</div>
+
+            <div class="variation-text">
+  同じ系統で、色味や印象を比較できる候補です。
+  グレー×シルバーの上質系に対して、白×シルバーの爽やか系、黒×ベージュの上質系、黒×ブルーの精悍系の4方向から、父に近い雰囲気を確認できます。
+</div>
+
+            <div class="variation-points js-stagger">
+  <div class="variation-point">グレー系</div>
+  <div class="variation-point">白シルバー系</div>
+  <div class="variation-point">黒×ベージュ</div>
+  <div class="variation-point">黒×ブルー</div>
+</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="back-home js-animate">
+        <a href="./index.html?skipAnimation=1">↶TOPへ戻る</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const animatedItems = document.querySelectorAll(".js-animate, .js-soft-scale, .js-stagger");
+
+      if (prefersReducedMotion) {
+        animatedItems.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      } else {
+        const observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+
+              const item = entry.target;
+              const delay = Number(item.dataset.delay || 0);
+
+              setTimeout(function () {
+                item.classList.add("is-visible");
+              }, delay);
+
+              observer.unobserve(item);
+            });
+          },
+          {
+            threshold: 0.14,
+            rootMargin: "0px 0px -6% 0px"
+          }
+        );
+
+        animatedItems.forEach(function (item) {
+          observer.observe(item);
+        });
+      }
+
+      const imageSwitchers = document.querySelectorAll(".image-switcher");
+
+      imageSwitchers.forEach(function (switcher) {
+        const mainImage = switcher.querySelector(".switch-main-image");
+        const thumbButtons = switcher.querySelectorAll(".thumb-button");
+
+        thumbButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            const fullImage = button.dataset.fullImage;
+            const altText = button.dataset.alt;
+
+            mainImage.src = fullImage;
+            mainImage.alt = altText;
+
+            thumbButtons.forEach(function (btn) {
+              btn.classList.remove("is-active");
+            });
+
+            button.classList.add("is-active");
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
